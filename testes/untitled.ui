@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.479, y1:0.125136, x2:0.499818, y2:1, stop:0 rgba(0, 109, 122, 255), stop:1 rgba(255, 255, 255, 255));</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.011236, y1:0.233, x2:1, y2:0.227, stop:0.134831 rgba(0, 0, 0, 255), stop:0.94382 rgba(253, 23, 255, 255));</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
