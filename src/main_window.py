@@ -3,6 +3,7 @@ from modulo.barra_titulos import Barra
 from modulo.menu_personalizado import MyMenu
 from modulo.sub_processo import MyThread
 from modulo.cronometro import Chrono
+from modulo.relogio import Relogio
 from datetime import datetime
 
 
@@ -13,6 +14,7 @@ class MyWindow(QtWidgets.QWidget):
     BACKGROUND = '#400080'
     LARGURA = 500
     ALTURA = 500
+    MODO = None
 
     
     def __init__(self):
@@ -44,15 +46,22 @@ class MyWindow(QtWidgets.QWidget):
         self.display.setMinimumSize(420, 100)
         self.display.setStyleSheet(
             'color: #e6ccff; font: 200 80pt "Ds-Digital";')
-
+        
+        
+        #############################################################
         # instancia do menu flutuante
         self.menu = MyMenu(self)
         self.menu.texto_cronometro.clicked.connect(self.cronometro)
+        self.menu.texto_relogio.clicked.connect(self.relogio)
 
+        
+        # display .....
         self.d = QtWidgets.QLabel('0:00:0')
         self.d.setStyleSheet(
             'color: #e6ccff; font: 200 80pt "Ds-Digital";')
 
+        
+        
         self.grade_corpo = QtWidgets.QGridLayout(self.corpo)
         self.grade_corpo.setContentsMargins(0, 0, 0, 0)
         self.grade_corpo.addWidget(
@@ -64,7 +73,7 @@ class MyWindow(QtWidgets.QWidget):
     def mousePressEvent(self, event):
         e = event.buttons()
         r = QtCore.Qt.MouseButton.RightButton
-        if e == r: 
+        if e == r and self.MODO == None: 
             self.menu.setVisible(True)
             self.menu.setGeometry(
                 event.pos().x(),
@@ -87,6 +96,13 @@ class MyWindow(QtWidgets.QWidget):
         self.th.tempo = 0.1
         self.crono = Chrono(self)
         self.th.SINAL.sinal.connect(self.crono.roda_cronometro)
+        self.display.setText('0:00:0')
+        self.MODO = 'crono'
+
+    
+    #################################################################
+    def relogio(self):
+        self.relogio_ = Relogio(self)
 
 
 
