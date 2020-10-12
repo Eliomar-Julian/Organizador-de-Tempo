@@ -1,27 +1,27 @@
-from PySide2 import QtWidgets, QtGui, QtCore
-from modulo.sub_processo import MyThread
+from PySide2 import QtWidgets
+# from modulo.sub_processo import MyThread
+
 
 class Chrono:
     # controles
     MODO = None
     MIL = SEG = MIN = HOR = 0
 
-    
     def __init__(self, pai):
         self.pai = pai
         self.cronometro_()
         self.pai.th.SINAL.sinal.disconnect()
         self.pai.display.setText('0:00:0')
 
-    
     # constroi o cronometro
+
     def cronometro_(self):
         self.conteiner = QtWidgets.QFrame(self.pai)
-        self.conteiner.setGeometry(55, 100, 400,80)
+        self.conteiner.setGeometry(55, 100, 400, 80)
         self.conteiner.show()
         self.pai.menu.setVisible(False)
         self.grade_cron = QtWidgets.QHBoxLayout(self.conteiner)
-        
+
         self.bt_reset = QtWidgets.QPushButton('Limpar')
         self.bt_reset.clicked.connect(
             lambda: self.roda_cronometro(self.bt_reset.text()))
@@ -54,10 +54,10 @@ class Chrono:
         for x in bts:
             x.setStyleSheet('''color: white; font: 100 12pt "Arial";
             width: 50px; height: 50px; border-radius: 25px;
-            background: teal;''')        
+            background: teal;''')
 
-    
     # função de controle dos botoes
+
     def roda_cronometro(self, botao):
         if botao == 'Print':
             self.print_()
@@ -71,24 +71,23 @@ class Chrono:
         if botao == 'Sair':
             self.listar.close()
             self.conteiner.close()
-            self.pai.th.SINAL.sinal.connect(self.pai.hora)
+            # self.pai.th.SINAL.sinal.connect(self.pai.hora)
             self.pai.MODO = None
 
+    # // print tempos
 
-    
-    # // print tempos 
     def print_(self):
         self.listar.addItem(self.pai.display.text())
-    
-    
+
     # limpa
+
     def limpar(self):
         self.MIL = self.SEG = self.MIN = self.HOR = 0
         self.listar.clear()
         self.pai.display.setText('0:00:0')
-    
-    
+
     # toca
+
     def play(self):
         self.bt_pausar.setText('Pausar')
         self.MIL += 1
@@ -103,4 +102,3 @@ class Chrono:
             self.MIN = 0
         self.pai.display.setText(
             f'{self.HOR}:{self.MIN}:{self.SEG}:{self.MIL}')
-
