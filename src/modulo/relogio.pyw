@@ -76,6 +76,8 @@ class Relogio:
             hh = int(datetime.utcnow(
             ).strftime('%H')) - self.dict_H[self.lista.currentItem(
             ).text()]
+            if hh <= 0:
+                hh = (hh * -1) - 1
 
             self.label.setText(
                 'UTC-zone: ' + self.lista.currentItem(

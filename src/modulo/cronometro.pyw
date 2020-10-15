@@ -71,7 +71,7 @@ class Chrono:
         if botao == 'Sair':
             self.listar.close()
             self.conteiner.close()
-            # self.pai.th.SINAL.sinal.connect(self.pai.hora)
+            self.pai.th.SINAL.sinal.connect(self.pai.hora)
             self.pai.MODO = None
 
     # // print tempos

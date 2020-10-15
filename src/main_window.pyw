@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtCore
+from PySide2 import QtWidgets, QtCore, QtGui
 from modulo.barra_titulos import Barra
 from modulo.menu_personalizado import MyMenu
 from modulo.sub_processo import MyThread
@@ -28,6 +28,8 @@ class MyWindow(QtWidgets.QWidget):
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.resize(self.LARGURA, self.ALTURA)
         self.setStyleSheet('background: %s;' % self.BACKGROUND)
+        self.setWindowIcon(QtGui.QIcon(
+            QtGui.QPixmap('./img/relogio.svg')))
         self.start()
 
     #################################################################
@@ -159,6 +161,8 @@ class MyWindow(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
+    app.setWindowIcon(QtGui.QIcon(
+        QtGui.QPixmap('./img/relogio.svg')))
     form = MyWindow()
     form.show()
     app.exec_()
